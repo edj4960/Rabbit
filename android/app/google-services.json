@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "19709990340",
+    "project_id": "rabbit-5cde2",
+    "storage_bucket": "rabbit-5cde2.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:19709990340:android:f06dab3871393115100091",
+        "android_client_info": {
+          "package_name": "com.rabbitapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "19709990340-9ftmtgd2g4lnfeag3blpamttt8q224sd.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBvi3ZPzk-xtaGH7cvQNkMnN-nW74oxIGE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "19709990340-9ftmtgd2g4lnfeag3blpamttt8q224sd.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
