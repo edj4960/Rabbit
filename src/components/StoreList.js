@@ -15,6 +15,7 @@ const StoreListEntry = ({ store }) => {
         borderRadius={5}
         justifyContent="center"
         px={15}
+        mb={15}
       >
         <Text
           fontSize={20}
