@@ -11,7 +11,7 @@ export const StoreListProvider = props => {
   useEffect(() => {
     db.collection('stores').get()
       .then(results => {
-        const stores = results.docs.map(collectIdsAndDocs);
+        const stores = results.docs.map(collectIdsAndDocs).sort((a, b) => a > b);
         setStores(stores);
       });
   }, []);
