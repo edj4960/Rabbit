@@ -13,6 +13,7 @@ const RootNavigator = props => {
       <Stack.Navigator name="Root">
         <Stack.Screen
           name="Home"
+          options={{ headerShown: false }}
           component={MainTabNavigator}
         />
       </Stack.Navigator>
