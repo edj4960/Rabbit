@@ -1,10 +1,11 @@
 import React, { useEffect, useContext, useState } from 'react';
 import { Text } from 'react-native-design-utility';
 
+import { useNavigation } from '@react-navigation/core';
+
 import { StoreListContext } from '../contexts/StoreListContext';
 import StoreScreenTitle from '../components/StoreScreenTitle';
-
-import { useNavigation } from '@react-navigation/core';
+import StoreScreenMenu from '../components/StoreScreenMenu';
 
 const StoreScreen = ({ route }) => {
   const navigation = useNavigation();
@@ -19,7 +20,12 @@ const StoreScreen = ({ route }) => {
 
   // Assign store name to title
   useEffect(() => {
-    navigation.setOptions({ title: <StoreScreenTitle store={store || route.params} /> });
+    navigation.setOptions({
+      title: <StoreScreenTitle store={store || route.params} />,
+      headerRight: () => {
+        return <StoreScreenMenu storeId={id} />
+      } 
+    });
   }, [store]);
 
   return (
