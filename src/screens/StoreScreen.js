@@ -7,6 +7,7 @@ import StoreScreenTitle from '../components/store/StoreScreenTitle';
 import StoreScreenMenu from '../components/store/StoreScreenMenu';
 
 import ItemList from '../components/item/ItemList';
+import AddItem from '../components/item/AddItem';
 
 const StoreScreen = ({ route }) => {
   const navigation = useNavigation();
@@ -32,6 +33,7 @@ const StoreScreen = ({ route }) => {
   return (
     <>
       <ItemList items={store.items || []} storeId={store.id} />
+      <AddItem storeId={store.id} nextPos={store.items.length} />
     </>
   )
 }
