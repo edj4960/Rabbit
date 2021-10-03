@@ -4,8 +4,8 @@ import { TouchableOpacity } from 'react-native-gesture-handler';
 import { useNavigation } from '@react-navigation/core';
 
 const StoreListEntry = ({ store }) => {
-  const { name } = { ...store };
   const navigation = useNavigation();
+  const { name } = { ...store };
 
   const navigateToStoreScreen = () => {
     navigation.navigate('Store', {...store});

@@ -20,6 +20,9 @@ const RootNavigator = () => {
         <Stack.Screen
           name="Store"
           component={StoreScreen}
+          options={{
+            headerTitleAlign: 'center'
+          }}
         />
       </Stack.Navigator>
     </NavigationContainer>
