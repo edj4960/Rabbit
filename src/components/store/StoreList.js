@@ -2,8 +2,8 @@ import React, { useContext, useEffect, useState } from 'react';
 import DraggableFlatList from "react-native-draggable-flatlist";
 
 import StoreListEntry from './StoreListEntry';
-import { StoreListContext } from '../contexts/StoreListContext';
-import { db } from '../firebase';
+import { StoreListContext } from '../../contexts/StoreListContext';
+import { db } from '../../firebase';
 
 const StoreList = () => {
   const stores = useContext(StoreListContext);

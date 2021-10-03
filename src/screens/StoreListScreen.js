@@ -2,8 +2,8 @@ import React from 'react';
 import { StyleSheet, TouchableOpacity } from 'react-native';
 import { Box, Text } from 'react-native-design-utility';
 
-import StoreList from '../components/StoreList';
-import AddStore from '../components/AddStore';
+import StoreList from '../components/store/StoreList';
+import AddStore from '../components/store/AddStore';
 
 const StoreListScreen = () => {
 

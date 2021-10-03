@@ -3,9 +3,10 @@
 import React from 'react';
 import { LogBox } from 'react-native';
 import RootNavigator from './src/navigators/RootNavigator';
-import { StoreListProvider } from './src/contexts/StoreListContext';
 
+import { StoreListProvider } from './src/contexts/StoreListContext';
 import { MenuProvider } from 'react-native-popup-menu';
+import { ItemProvider } from './src/contexts/ItemContext';
 
 // Font Awesome Setup
 import { library } from '@fortawesome/fontawesome-svg-core';
@@ -20,11 +21,13 @@ LogBox.ignoreLogs([
 const App = () => {
 
   return (
-    <StoreListProvider>
-      <MenuProvider>
-        <RootNavigator />
-      </MenuProvider>
-    </StoreListProvider>
+    <ItemProvider>
+      <StoreListProvider>
+        <MenuProvider>
+          <RootNavigator />
+        </MenuProvider>
+      </StoreListProvider>
+    </ItemProvider>
   );
 };
 

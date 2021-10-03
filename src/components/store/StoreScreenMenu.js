@@ -5,7 +5,7 @@ import { Box, Text } from 'react-native-design-utility';
 
 import { Menu, MenuOptions, MenuOption, MenuTrigger } from 'react-native-popup-menu';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
-import { db } from '../firebase';
+import { db } from '../../firebase';
 
 const StoreScreenMenu = ({ storeId }) => {
   const navigation = useNavigation();

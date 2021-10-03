@@ -1,11 +1,12 @@
 import React, { useEffect, useContext, useState } from 'react';
 import { Text } from 'react-native-design-utility';
-
 import { useNavigation } from '@react-navigation/core';
 
 import { StoreListContext } from '../contexts/StoreListContext';
-import StoreScreenTitle from '../components/StoreScreenTitle';
-import StoreScreenMenu from '../components/StoreScreenMenu';
+import StoreScreenTitle from '../components/store/StoreScreenTitle';
+import StoreScreenMenu from '../components/store/StoreScreenMenu';
+
+import ItemList from '../components/item/ItemList';
 
 const StoreScreen = ({ route }) => {
   const navigation = useNavigation();
@@ -30,7 +31,7 @@ const StoreScreen = ({ route }) => {
 
   return (
     <>
-      <Text>{id}</Text>
+      <ItemList items={store.items || []} storeId={store.id} />
     </>
   )
 }

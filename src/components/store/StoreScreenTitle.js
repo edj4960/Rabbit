@@ -3,7 +3,7 @@ import { TextInput } from 'react-native';
 import { Box, Text } from 'react-native-design-utility';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 
-import { db } from '../firebase';
+import { db } from '../../firebase';
 
 const StoreScreenTitle = ({ store }) => {
   const [name, setName] = useState('');
