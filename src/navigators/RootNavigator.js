@@ -3,10 +3,11 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 
 import MainTabNavigator from './MainTabNavigator';
+import StoreScreen from '../screens/StoreScreen';
 
 const Stack = createStackNavigator();
 
-const RootNavigator = props => {
+const RootNavigator = () => {
   
   return (
     <NavigationContainer>
@@ -15,6 +16,10 @@ const RootNavigator = props => {
           name="Home"
           options={{ headerShown: false }}
           component={MainTabNavigator}
+        />
+        <Stack.Screen
+          name="Store"
+          component={StoreScreen}
         />
       </Stack.Navigator>
     </NavigationContainer>
