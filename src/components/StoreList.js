@@ -31,7 +31,7 @@ const StoreList = () => {
   const stores = useContext(StoreListContext);
 
   return (
-    <Box mx={30} my={30}>
+    <Box>
       {
         stores.map((store) => {
           return <StoreListEntry key={store.id} store={store} />

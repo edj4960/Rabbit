@@ -9,9 +9,9 @@ export const StoreListProvider = props => {
   const [stores, setStores] = useState([]);
 
   useEffect(() => {
-    db.collection('stores').get()
-      .then(results => {
-        const stores = results.docs.map(collectIdsAndDocs).sort((a, b) => a > b);
+    db.collection('stores')
+      .onSnapshot(results => {
+        const stores = results.docs.map(collectIdsAndDocs).sort((a, b) => a.order > b.order);
         setStores(stores);
       });
   }, []);
