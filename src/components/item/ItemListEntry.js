@@ -5,6 +5,9 @@ import { TouchableOpacity } from 'react-native-gesture-handler';
 import { focusInputWithKeyboard } from '../../utilities';
 import { db } from '../../firebase';
 
+import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
+import CompleteItem from './CompleteItem';
+
 const ItemListEntry = ({ item, drag, storeId }) => {
   const [name, setName] = useState('');
   const [isEdit, setIsEdit] = useState(false);
@@ -55,7 +58,11 @@ const ItemListEntry = ({ item, drag, storeId }) => {
         w="100%"
         h={80}
         style={styles.itemContainer}
+        flex={true}
+        flexDirection="row"
+        alignItems="center"
       >
+        <CompleteItem itemId={item.id} />
         {
           !isEdit &&
           <TouchableOpacity
