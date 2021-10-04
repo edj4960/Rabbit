@@ -15,11 +15,20 @@ const ItemListEntry = ({ item, storeId }) => {
 
   const startEdit = () => {
     setIsEdit(true);
-
     textInputRef.current.focus();
   }
 
+  const deleteItem = async () => {
+    await db.collection('items')
+      .doc(item.id)
+      .delete();
+  }
+
   const submitName = async () => {
+    if (!name) {
+      await deleteItem();
+      return;
+    }
 
     await db.collection('items')
       .doc(item.id)
@@ -29,9 +38,11 @@ const ItemListEntry = ({ item, storeId }) => {
   }
 
   useEffect(() => {
-    // TODO: if item has no name then it should be focused on for text input.
-    // If the user exits the page or closes the keyboard without any input the item should be deleted.
-  }, []);
+    if (!item.name) {
+      setIsEdit(true);
+      textInputRef.current.focus();
+    }
+  }, [textInputRef]);
 
   return (
     <Box
