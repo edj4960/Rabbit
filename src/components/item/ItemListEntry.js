@@ -2,9 +2,10 @@ import React, { useEffect, useState, useRef } from 'react';
 import { StyleSheet, TextInput } from 'react-native';
 import { Box, Text } from 'react-native-design-utility';
 import { TouchableOpacity } from 'react-native-gesture-handler';
+import { focusInputWithKeyboard } from '../../utilities';
 import { db } from '../../firebase';
 
-const ItemListEntry = ({ item, storeId }) => {
+const ItemListEntry = ({ item, drag, storeId }) => {
   const [name, setName] = useState('');
   const [isEdit, setIsEdit] = useState(false);
   const textInputRef = useRef();
@@ -40,40 +41,45 @@ const ItemListEntry = ({ item, storeId }) => {
   useEffect(() => {
     if (!item.name) {
       setIsEdit(true);
-      textInputRef.current.focus();
+      focusInputWithKeyboard(textInputRef);
     }
   }, [textInputRef]);
 
   return (
-    <Box
-      p={10}
-      w="100%"
-      h={80}
-      style={styles.itemContainer}
+    <TouchableOpacity
+      onLongPress={drag}
+      delayLongPress={250}
     >
-      {
-        !isEdit &&
-        <TouchableOpacity
-          onPress={startEdit}
-        >
-          <Text>{name}</Text>
-        </TouchableOpacity>
-      }
-      {/* <Box> */}
-        <TextInput
-          ref={textInputRef}
-          style={{
-            height: 50,
-            width: 200,
-            display: !isEdit ? 'none' : 'flex'
-          }}
-          value={name}
-          onChangeText={setName}
-          onEndEditing={submitName}
-          onSubmitEditing={submitName}
-        />        
-      {/* </Box> */}
-    </Box>
+      <Box
+        p={10}
+        w="100%"
+        h={80}
+        style={styles.itemContainer}
+      >
+        {
+          !isEdit &&
+          <TouchableOpacity
+            onPress={startEdit}
+          >
+            <Text>{name}</Text>
+          </TouchableOpacity>
+        }
+        {/* <Box> */}
+          <TextInput
+            ref={textInputRef}
+            style={{
+              height: 50,
+              width: 200,
+              display: !isEdit ? 'none' : 'flex'
+            }}
+            value={name}
+            onChangeText={setName}
+            onEndEditing={submitName}
+            onSubmitEditing={submitName}
+          />        
+        {/* </Box> */}
+      </Box>
+    </TouchableOpacity>
   )
 }
 
