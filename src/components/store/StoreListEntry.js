@@ -2,7 +2,6 @@ import React from 'react';
 import { Text, Box } from 'react-native-design-utility';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { useNavigation } from '@react-navigation/core';
-import { ScaleDecorator } from 'react-native-draggable-flatlist';
 
 const StoreListEntry = ({ store, drag }) => {
   const navigation = useNavigation();

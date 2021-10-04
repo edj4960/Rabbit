@@ -9,11 +9,12 @@ export const ItemProvider = props => {
   const [items, setItems] = useState([]);
 
   useEffect(() => {
-    db.collection('items')
+    const unsubscribe = db.collection('items')
       .onSnapshot(results => {
         const items = results.docs.map(collectIdsAndDocs);
         setItems(items);
       });
+    return () => unsubscribe()
   }, []);
 
   return (

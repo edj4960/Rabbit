@@ -33,7 +33,7 @@ const StoreScreen = ({ route }) => {
   return (
     <>
       <ItemList items={store.items || []} storeId={store.id} />
-      <AddItem storeId={store.id} nextPos={store.items.length} />
+      <AddItem storeId={store.id} nextPos={store?.items?.length || 0} />
     </>
   )
 }
