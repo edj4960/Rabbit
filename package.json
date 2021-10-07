@@ -30,6 +30,7 @@
     "react-native-screens": "^3.8.0",
     "react-native-svg": "^12.1.1",
     "react-native-sweet-alert": "^3.5.0",
+    "react-native-swipeable-item": "^1.5.7",
     "typescript": "^4.4.3"
   },
   "devDependencies": {
