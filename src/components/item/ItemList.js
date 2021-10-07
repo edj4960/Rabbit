@@ -39,8 +39,9 @@ const ItemList = ({ items, storeId }) => {
       keyExtractor={(item) => item.id}
       renderItem={renderItem}
       onDragEnd={reorderItems}
+      style={{ height: 5 }}
+      
     />
-    // items.map((item) => <ItemListEntry key={item.id} item={item} storeId={storeId} />)
   )
 }
 
