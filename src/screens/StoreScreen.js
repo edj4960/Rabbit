@@ -34,7 +34,7 @@ const StoreScreen = ({ route }) => {
 
   const updateName = async (name) => {
     if (!id) {
-      const storeRef = await db.collection('stores').add({ name: name });
+      const storeRef = await db.collection('stores').add({ name: name, order: stores?.length || 0 });
       setId(storeRef.id);
     } else {
       await db.collection('stores')

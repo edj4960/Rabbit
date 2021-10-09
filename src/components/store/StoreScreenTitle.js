@@ -21,7 +21,7 @@ const StoreScreenTitle = ({ isNew, store, updateName }) => {
   // Set name everytime the store udpates
   useEffect(() => {
     setName(store.name || '');
-    setSelection({ start: store.name?.length || 0, end: store.name?.length || 0 });
+    setSelection({ start: store?.name?.length || 0, end: store?.name?.length || 0 });
   }, [store]);
 
   const startEdit = () => {
@@ -71,7 +71,7 @@ const StoreScreenTitle = ({ isNew, store, updateName }) => {
           }}
           placeholder="Enter Store Name"
           onFocus={() => {
-            setSelection({start: name.length, end: name.length})
+            setSelection({start: name.length || 0, end: name.length || 0})
           }}
           selection={selection}
           onSelectionChange={setSelection}
