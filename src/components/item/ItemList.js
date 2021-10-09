@@ -5,7 +5,7 @@ import { db } from '../../firebase';
 
 import ItemListEntry from './ItemListEntry';
 
-const ItemList = ({ items, storeId }) => {
+const ItemList = ({ items, storeId, scrollable = true }) => {
   const [data, setData] = useState([]);
 
   useEffect(() => {
@@ -34,13 +34,17 @@ const ItemList = ({ items, storeId }) => {
   }
 
   return (
-    <View style={{ backgroundColor: 'grey', height: '100%' }}>
+    <View style={{
+      backgroundColor: 'grey',
+      height: '100%'
+    }}>
       <DraggableFlatList
         data={data}
         keyExtractor={(item) => item.id}
         renderItem={renderItem}
         onDragEnd={reorderItems}
         maxToRenderPerBatch={6}
+        scrollEnabled={scrollable}
       />
     </View>
   )
