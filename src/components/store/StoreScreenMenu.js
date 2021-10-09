@@ -42,6 +42,7 @@ const StoreScreenMenu = ({ storeId }) => {
   }
 
   return (
+    !!storeId &&
     <Box mr={15}>
       <Menu>
         <MenuTrigger>
