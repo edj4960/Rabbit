@@ -2,11 +2,13 @@ import React from 'react';
 import { StyleSheet, View } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { Box, Text } from 'react-native-design-utility';
+import { useNavigation } from '@react-navigation/core';
 
 const AddStore = () => {
+  const navigation = useNavigation();
 
   const onPress = async () => {
-    // TODO: Open blank store page
+    navigation.navigate('Store');
   }
 
   return (

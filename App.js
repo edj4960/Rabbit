@@ -3,6 +3,7 @@
 import React from 'react';
 import { LogBox } from 'react-native';
 import RootNavigator from './src/navigators/RootNavigator';
+import Toast from 'react-native-toast-message';
 
 import { StoreListProvider } from './src/contexts/StoreListContext';
 import { MenuProvider } from 'react-native-popup-menu';
@@ -21,13 +22,16 @@ LogBox.ignoreLogs([
 const App = () => {
 
   return (
-    <ItemProvider>
-      <StoreListProvider>
-        <MenuProvider>
-          <RootNavigator />
-        </MenuProvider>
-      </StoreListProvider>
-    </ItemProvider>
+    <>
+      <ItemProvider>
+        <StoreListProvider>
+          <MenuProvider>
+            <RootNavigator />
+          </MenuProvider>
+        </StoreListProvider>
+      </ItemProvider>
+      <Toast ref={(ref) => Toast.setRef(ref)} />
+    </>
   );
 };
 

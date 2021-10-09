@@ -24,11 +24,13 @@ export const StoreListProvider = props => {
   }, [items, storesRaw]);
 
   useEffect(() => {
-    db.collection('stores')
+    const unsubscribe = db.collection('stores')
       .onSnapshot(results => {
         const storesRaw = results.docs.map(collectIdsAndDocs).sort((a, b) => a.order > b.order);
         setStoresRaw(storesRaw);
       });
+
+    return () => unsubscribe()
   }, []);
   
   return (
