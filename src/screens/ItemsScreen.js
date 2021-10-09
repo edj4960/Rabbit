@@ -33,7 +33,6 @@ const ItemsScreen = () => {
         stores.map((store) => <StoreItemList key={store.id} store={store} />)
       }
     </View>
-
   )
 }
 

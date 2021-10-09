@@ -15,6 +15,13 @@ const StoreScreenMenu = ({ storeId }) => {
       .doc(storeId)
       .delete();
     
+    const itemsQuery = db.collection('items').where('storeId', '==', storeId);
+    itemsQuery.get().then((docRefs) => {
+      docRefs.forEach((doc) => {
+        doc.ref.delete();
+      });
+    });
+    
     navigation.goBack();
   }
 
