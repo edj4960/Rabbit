@@ -1,9 +1,28 @@
 import React, { useContext } from 'react';
 import { StyleSheet, View } from 'react-native';
 import { Box, Text } from 'react-native-design-utility';
-import ItemList from '../components/item/ItemList';
+import { useNavigation } from '@react-navigation/core';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 
+import ItemList from '../components/item/ItemList';
 import { StoreListContext } from '../contexts/StoreListContext';
+
+const StoreItemList = ({ store }) => {
+  const navigation = useNavigation();
+
+  const navigateToStoreScreen = () => {
+    navigation.navigate('Store', { ...store });
+  }
+
+  return (
+    <Box style={styles.storeContainer}>
+      <TouchableOpacity onPress={navigateToStoreScreen}>
+        <Text>{store.name}</Text>
+      </TouchableOpacity>
+      <ItemList items={store.items || []} storeId={store.id} />
+    </Box>
+  )
+}
 
 const ItemsScreen = () => {
   const stores = useContext(StoreListContext);
@@ -11,14 +30,7 @@ const ItemsScreen = () => {
   return (
     <View style={styles.container}>
       {
-        stores.map((store) => {
-          return (
-            <Box key={store.id} style={styles.storeContainer}>
-              <Text>{store.name}</Text>
-              <ItemList items={store.items || []} storeId={store.id} />
-            </Box>
-          )
-        })
+        stores.map((store) => <StoreItemList key={store.id} store={store} />)
       }
     </View>
 

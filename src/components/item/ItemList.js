@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
+import { View } from 'react-native';
 import DraggableFlatList from 'react-native-draggable-flatlist';
 import { db } from '../../firebase';
 
 import ItemListEntry from './ItemListEntry';
 
 const ItemList = ({ items, storeId }) => {
-
   const [data, setData] = useState([]);
 
   useEffect(() => {
@@ -34,14 +34,15 @@ const ItemList = ({ items, storeId }) => {
   }
 
   return (
-    <DraggableFlatList
-      data={data}
-      keyExtractor={(item) => item.id}
-      renderItem={renderItem}
-      onDragEnd={reorderItems}
-      style={{ height: 5 }}
-      
-    />
+    <View style={{ backgroundColor: 'grey', height: '100%' }}>
+      <DraggableFlatList
+        data={data}
+        keyExtractor={(item) => item.id}
+        renderItem={renderItem}
+        onDragEnd={reorderItems}
+        maxToRenderPerBatch={6}
+      />
+    </View>
   )
 }
 

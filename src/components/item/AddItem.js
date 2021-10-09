@@ -37,11 +37,9 @@ const AddItem = ({ storeId, nextPos }) => {
 
 const styles = StyleSheet.create({
   addItemContainer: {
-    flex: 1,
-    marginBottom: 20,
-    marginRight: 20,
-    justifyContent: 'flex-end',
-    alignItems: 'flex-end'
+    position: 'absolute',
+    bottom: 20,
+    right: 20,
   }
 })
 

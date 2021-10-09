@@ -1,5 +1,5 @@
 import React, { useEffect, useContext, useState } from 'react';
-import { Text } from 'react-native-design-utility';
+import { Box } from 'react-native-design-utility';
 import { useNavigation } from '@react-navigation/core';
 
 import { StoreListContext } from '../contexts/StoreListContext';
@@ -31,10 +31,10 @@ const StoreScreen = ({ route }) => {
   }, [store]);
 
   return (
-    <>
+    <Box f={1} backgroundColor="black">
       <ItemList items={store.items || []} storeId={store.id} />
       <AddItem storeId={store.id} nextPos={store?.items?.length || 0} />
-    </>
+    </Box>
   )
 }
 
