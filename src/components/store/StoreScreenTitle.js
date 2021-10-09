@@ -4,12 +4,15 @@ import { Box, Text } from 'react-native-design-utility';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { focusInputWithKeyboard } from '../../utilities';
 import Toast from 'react-native-toast-message';
+import { useNavigation } from '@react-navigation/core';
 
 const StoreScreenTitle = ({ isNew, store, updateName }) => {
   const [name, setName] = useState('');
   const [selection, setSelection] = useState({ start: 0, end: 0 });
+  const [goingBack, setGoingBack] = useState(false);
   const [isEdit, setIsEdit] = useState(false);
   const textInputRef = useRef();
+  const navigation = useNavigation();
 
   // If new store begin editting title
   useEffect(() => {
@@ -17,6 +20,15 @@ const StoreScreenTitle = ({ isNew, store, updateName }) => {
       startEdit();
     }
   }, []);
+
+  // Save if navigating back to prevent error toast from appearing
+  useEffect(() => {
+    navigation.addListener('beforeRemove', () => {
+      setGoingBack(true);
+    });
+
+    return () => navigation.removeListener('beforeRemove');
+  }, [navigation]);
 
   // Set name everytime the store udpates
   useEffect(() => {
@@ -31,7 +43,8 @@ const StoreScreenTitle = ({ isNew, store, updateName }) => {
 
   const invalidStoreName = () => {
     if (name) return false;
-    
+    if (goingBack) return true;
+
     focusInputWithKeyboard(textInputRef);
     setTimeout(() => {
       Toast.show({
@@ -71,13 +84,14 @@ const StoreScreenTitle = ({ isNew, store, updateName }) => {
           }}
           placeholder="Enter Store Name"
           onFocus={() => {
-            setSelection({start: name.length || 0, end: name.length || 0})
+            setSelection({ start: name.length || 0, end: name.length || 0 })
           }}
           selection={selection}
           onSelectionChange={setSelection}
           value={name}
           onChangeText={setName}
           onSubmitEditing={submitTitle}
+          onEndEditing={submitTitle}
         />
       </Box>
     </>
