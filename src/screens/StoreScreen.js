@@ -25,7 +25,7 @@ const StoreScreen = ({ route }) => {
   // Assign store name to title
   useEffect(() => {
     navigation.setOptions({
-      title: <StoreScreenTitle store={store} updateName={updateName} />,
+      title: <StoreScreenTitle isNew={!id} store={store} updateName={updateName} />,
       headerRight: () => {
         return <StoreScreenMenu storeId={id} />
       } 

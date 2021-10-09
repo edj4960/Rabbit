@@ -5,21 +5,23 @@ import { TouchableOpacity } from 'react-native-gesture-handler';
 import { focusInputWithKeyboard } from '../../utilities';
 import Toast from 'react-native-toast-message';
 
-const StoreScreenTitle = ({ store, updateName }) => {
+const StoreScreenTitle = ({ isNew, store, updateName }) => {
   const [name, setName] = useState('');
+  const [selection, setSelection] = useState({ start: 0, end: 0 });
   const [isEdit, setIsEdit] = useState(false);
   const textInputRef = useRef();
 
   // If new store begin editting title
   useEffect(() => {
-    if (!store?.name) {
+    if (isNew) {
       startEdit();
     }
-  }, [])
+  }, []);
 
   // Set name everytime the store udpates
   useEffect(() => {
     setName(store.name || '');
+    setSelection({ start: store.name?.length || 0, end: store.name?.length || 0 });
   }, [store]);
 
   const startEdit = () => {
@@ -56,7 +58,7 @@ const StoreScreenTitle = ({ store, updateName }) => {
         <TouchableOpacity
           onPress={startEdit}
         >
-          <Text>{store.name}</Text>
+          <Text>{name}</Text>
         </TouchableOpacity>
       }
       <Box>
@@ -68,6 +70,11 @@ const StoreScreenTitle = ({ store, updateName }) => {
             display: !isEdit ? 'none' : 'flex'
           }}
           placeholder="Enter Store Name"
+          onFocus={() => {
+            setSelection({start: name.length, end: name.length})
+          }}
+          selection={selection}
+          onSelectionChange={setSelection}
           value={name}
           onChangeText={setName}
           onSubmitEditing={submitTitle}
