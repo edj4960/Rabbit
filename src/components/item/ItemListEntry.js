@@ -1,13 +1,12 @@
 import React, { useEffect, useState, useRef } from 'react';
-import { StyleSheet, TextInput } from 'react-native';
+import { StyleSheet, TextInput, TouchableOpacity, Animated, Dimensions } from 'react-native';
 import { Box, Text } from 'react-native-design-utility';
-import { TouchableOpacity } from 'react-native-gesture-handler';
 import { focusInputWithKeyboard } from '../../utilities';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import { faTrashAlt } from '@fortawesome/free-solid-svg-icons';
 import { db } from '../../firebase';
 
-import Animated from 'react-native-reanimated';
+import Reanimated from 'react-native-reanimated';
 import CompleteItem from './CompleteItem';
 import SwipeableItem from 'react-native-swipeable-item'
 
@@ -15,6 +14,7 @@ const ItemListEntry = ({ item, drag, storeId }) => {
   const [name, setName] = useState('');
   const [isEdit, setIsEdit] = useState(false);
   const textInputRef = useRef();
+  const transXAnim = useRef(new Animated.Value(0)).current;
 
   useEffect(() => {
     setName(item?.name || '');
@@ -26,10 +26,23 @@ const ItemListEntry = ({ item, drag, storeId }) => {
   }
 
   const deleteItem = async () => {
-    await db.collection('items')
-      .doc(item.id)
-      .delete();
+    Animated.sequence([
+      itemRemovalAnim
+    ]).start(() => {
+      db.collection('items')
+        .doc(item.id)
+        .delete();
+    });
   }
+
+  const itemRemovalAnim = Animated.timing(
+    transXAnim,
+    {
+      toValue: -Dimensions.get('screen').width,
+      duration: 200,
+      useNativeDriver: true
+    }
+  )
 
   const submitName = async () => {
     if (!name) {
@@ -51,10 +64,10 @@ const ItemListEntry = ({ item, drag, storeId }) => {
     }
   }, [textInputRef]);
 
-  const renderUnderlayLeft = ({ percentOpen }) => {
+  const renderUnderlayLeft = (test) => {
     return (
-      <Animated.View
-        style={[styles.row, styles.underlayLeft, { opacity: percentOpen }]}
+      <Reanimated.View
+        style={[styles.row, styles.underlayLeft, { opacity: test.percentOpen }]}
       >
         <TouchableOpacity
           style={styles.deleteButton}
@@ -65,55 +78,59 @@ const ItemListEntry = ({ item, drag, storeId }) => {
             size={20}
           />
         </TouchableOpacity>
-      </Animated.View>
+      </Reanimated.View>
     )
   }
 
   return (
-    <SwipeableItem
-      overSwipe={20}
-      snapPointsLeft={[75]}
-      key={item.id}
-      item={item}
-      renderUnderlayLeft={renderUnderlayLeft}
+    <Animated.View
+      style={{
+        transform: [
+          { translateX: transXAnim }
+        ],
+        ...styles.itemContainer
+      }}
     >
-      <TouchableOpacity
-        onLongPress={drag}
-        delayLongPress={400}
+      <SwipeableItem
+        overSwipe={20}
+        snapPointsLeft={[75]}
+        key={item.id}
+        item={item}
+        renderUnderlayLeft={renderUnderlayLeft}
       >
-        <Box
-          p={10}
-          w="100%"
-          h={80}
-          style={styles.itemContainer}
-          flex={true}
-          flexDirection="row"
-          alignItems="center"
+        <TouchableOpacity
+          onPress={startEdit}
+          onLongPress={drag}
+          delayLongPress={400}
         >
-          <CompleteItem itemId={item.id} />
-          {
-            !isEdit &&
-            <TouchableOpacity
-              onPress={startEdit}
-            >
-              <Text>{name}</Text>
-            </TouchableOpacity>
-          }
-          <TextInput
-            ref={textInputRef}
-            style={{
-              height: 50,
-              width: 200,
-              display: !isEdit ? 'none' : 'flex'
-            }}
-            value={name}
-            onChangeText={setName}
-            onEndEditing={submitName}
-            onSubmitEditing={submitName}
-          />        
-        </Box>
-      </TouchableOpacity>
-    </SwipeableItem>
+          <Box
+            p={10}
+            w="100%"
+            h={80}
+            flex={true}
+            flexDirection="row"
+            alignItems="center"
+          >
+            <CompleteItem itemId={item.id} itemRemovalAnim={itemRemovalAnim} />
+            {
+              !isEdit && <Text>{name}</Text>
+            }
+            <TextInput
+              ref={textInputRef}
+              style={{
+                height: 50,
+                width: 200,
+                display: !isEdit ? 'none' : 'flex'
+              }}
+              value={name}
+              onChangeText={setName}
+              onEndEditing={submitName}
+              onSubmitEditing={submitName}
+            />        
+          </Box>
+        </TouchableOpacity>
+      </SwipeableItem>
+    </Animated.View>
   )
 }
 
