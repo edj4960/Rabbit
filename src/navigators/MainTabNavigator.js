@@ -42,12 +42,12 @@ const MainTabNavigator = () => {
       <Tab.Screen
         name="StoreListNav"
         component={StoreListScreen}
-        options={{ title: 'Stores', tabBarShowLabel: false}}
+        options={{ title: 'Stores', tabBarShowLabel: false, headerShown: false }}
       />
       <Tab.Screen
         name="ItemsNav"
         component={ItemsScreen}
-        options={{ title: 'Items', tabBarShowLabel: false}}
+        options={{ title: 'Items', tabBarShowLabel: false, headerShown: false }}
       />
     </Tab.Navigator>
   )

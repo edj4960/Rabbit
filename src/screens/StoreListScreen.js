@@ -4,11 +4,13 @@ import { Box, Text } from 'react-native-design-utility';
 
 import StoreList from '../components/store/StoreList';
 import AddStore from '../components/store/AddStore';
+import appStyles from '../styles/appStyles';
 
 const StoreListScreen = () => {
 
   return (
-    <Box mx={30} my={30} h="100%">
+    <Box style={appStyles.background}>
+      <Text style={appStyles.pageTitle}>Stores</Text>
       <StoreList />
       <AddStore />
     </Box>
