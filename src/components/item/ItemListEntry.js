@@ -9,6 +9,7 @@ import { db } from '../../firebase';
 import Reanimated from 'react-native-reanimated';
 import CompleteItem from './CompleteItem';
 import SwipeableItem from 'react-native-swipeable-item'
+import appColors from '../../styles/appColors';
 
 const ItemListEntry = ({ item, drag, storeId }) => {
   const [name, setName] = useState('');
@@ -76,6 +77,7 @@ const ItemListEntry = ({ item, drag, storeId }) => {
           <FontAwesomeIcon
             icon={faTrashAlt}
             size={20}
+            color={appColors.light}
           />
         </TouchableOpacity>
       </Reanimated.View>
@@ -103,17 +105,10 @@ const ItemListEntry = ({ item, drag, storeId }) => {
           onLongPress={drag}
           delayLongPress={400}
         >
-          <Box
-            p={10}
-            w="100%"
-            h={80}
-            flex={true}
-            flexDirection="row"
-            alignItems="center"
-          >
+          <Box style={styles.itemInnerContiner}>
             <CompleteItem itemId={item.id} itemRemovalAnim={itemRemovalAnim} />
             {
-              !isEdit && <Text>{name}</Text>
+              !isEdit && <Text style={styles.itemText}>{name}</Text>
             }
             <TextInput
               ref={textInputRef}
@@ -136,30 +131,34 @@ const ItemListEntry = ({ item, drag, storeId }) => {
 
 const styles = StyleSheet.create({
   itemContainer: {
-    borderBottomWidth: 1
+    backgroundColor: appColors.background,
+    borderRadius: 5,
+    marginTop: 2
   },
-  itemTextInput: {
-    height: 10
+  itemInnerContiner: {
+    padding: 10,
+    width: '100%',
+    height: 50,
+    flex: 1,
+    flexDirection: 'row',
+    alignItems: 'center'
+  },
+  itemText: {
+    fontSize: 18,
+    color: appColors.light
   },
   underlayLeft: {
     flex: 1,
-    backgroundColor: 'tomato',
     justifyContent: 'flex-end',
-  },
-  row: {
     flexDirection: 'row',
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center'
   },
   deleteButton: {
-    width: 75,
+    width: 100,
     height: '100%',
-    flex: 1,
+    backgroundColor: appColors.warning,
     textAlign: 'center',
     alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor: 'grey'
+    justifyContent: 'center'
   }
 })
 

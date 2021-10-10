@@ -3,11 +3,12 @@ import { View, StyleSheet, Animated, TouchableOpacity, Dimensions } from 'react-
 import { db } from '../../firebase';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import { faCheckCircle } from '@fortawesome/free-solid-svg-icons';
+import appColors from '../../styles/appColors';
 
 const CompleteItem = ({ itemId, itemRemovalAnim }) => {
   const scaleAnim = useRef(new Animated.Value(1)).current;
   const completeIconAnim = useRef(new Animated.Value(0)).current;
-  const diameter = 30;
+  const diameter = 25;
 
   const animateComplete = (callback) => {
     Animated.sequence([
@@ -51,13 +52,7 @@ const CompleteItem = ({ itemId, itemRemovalAnim }) => {
             transform: [
               { scale: scaleAnim },
             ],
-            borderWidth: 2,
-            borderColor: 'rgba(0,0,0,0.2)',
-            alignItems: 'center',
-            justifyContent: 'center',
-            backgroundColor: '#fff',
-            borderRadius: 25,
-            marginRight: 10
+            ...styles.circle
           }}
         />
       </TouchableOpacity>
@@ -73,7 +68,11 @@ const CompleteItem = ({ itemId, itemRemovalAnim }) => {
           marginRight: 10
         }}
       >
-        <FontAwesomeIcon icon={faCheckCircle} size={diameter}/>
+        <FontAwesomeIcon
+          icon={faCheckCircle}
+          size={diameter}
+          color={appColors.primary}
+        />
       </Animated.View>
     </View>
   )
@@ -81,6 +80,12 @@ const CompleteItem = ({ itemId, itemRemovalAnim }) => {
 
 const styles = StyleSheet.create({
   circle: {
+    borderWidth: 3,
+    borderColor: appColors.primary,
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderRadius: 25,
+    marginRight: 10
   }
 })
 
