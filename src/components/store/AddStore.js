@@ -5,7 +5,7 @@ import { Box, Text } from 'react-native-design-utility';
 import { useNavigation } from '@react-navigation/core';
 
 import appStyles from '../../styles/appStyles';
-import { primaryLight } from '../../styles/colors';
+import appColors from '../../styles/appColors';
 
 const AddStore = () => {
   const navigation = useNavigation();
@@ -18,7 +18,7 @@ const AddStore = () => {
     <View style={appStyles.bottomRightContainer}>
       <TouchableOpacity onPress={onPress}>
         <Box style={appStyles.addButton}>
-          <Text center bold color={primaryLight}>Add Store</Text>
+          <Text center bold color={appColors.primaryLight}>Add Store</Text>
         </Box>
       </TouchableOpacity>
     </View>

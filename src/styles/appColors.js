@@ -12,7 +12,7 @@ export const white = '#FFFFFF';
 export const light = '#EEEEEE';
 export const grey = '#E2E2E2';
 
-export default Colors = {
+export default appColors = {
   primary,
   primaryLight,
   primaryDark,

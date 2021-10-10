@@ -5,11 +5,12 @@ import StoreListScreen from '../screens/StoreListScreen';
 import ItemsScreen from '../screens/ItemsScreen';
 
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
+import appStyles from '../styles/appStyles';
+import appColors from '../styles/appColors';
 
 const Tab = createBottomTabNavigator();
 
 const MainTabNavigator = () => {
-
   return (
     <Tab.Navigator
       name="TabMain"
@@ -33,21 +34,26 @@ const MainTabNavigator = () => {
           return (
             <FontAwesomeIcon
               icon={iconName}
-              size={20}
+              size={size}
+              color={color}
             />
           )
         },
+        tabBarStyle: appStyles.tabBarStyle,
+        tabBarActiveTintColor: appColors.primary,
+        tabBarShowLabel: false,
+        headerShown: false,
       })}
     >
       <Tab.Screen
         name="StoreListNav"
         component={StoreListScreen}
-        options={{ title: 'Stores', tabBarShowLabel: false, headerShown: false }}
+        options={{ title: 'Stores' }}
       />
       <Tab.Screen
         name="ItemsNav"
         component={ItemsScreen}
-        options={{ title: 'Items', tabBarShowLabel: false, headerShown: false }}
+        options={{ title: 'Items'}}
       />
     </Tab.Navigator>
   )

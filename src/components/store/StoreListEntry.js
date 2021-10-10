@@ -3,7 +3,7 @@ import { Text, Box } from 'react-native-design-utility';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { useNavigation } from '@react-navigation/core';
 
-import Colors from '../../styles/colors';
+import appColors from '../../styles/appColors';
 
 const StoreListEntry = ({ store, drag }) => {
   const navigation = useNavigation();
@@ -21,14 +21,14 @@ const StoreListEntry = ({ store, drag }) => {
     >
       <Box
         height={50}
-        backgroundColor={Colors.background}
+        backgroundColor={appColors.background}
         borderRadius={5}
         justifyContent="center"
         px={15}
         mb={15}
       >
         <Text
-          color={Colors.light}
+          color={appColors.light}
           fontSize={20}
         >
           {name}
