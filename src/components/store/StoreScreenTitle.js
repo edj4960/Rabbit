@@ -5,6 +5,8 @@ import { TouchableOpacity } from 'react-native-gesture-handler';
 import { focusInputWithKeyboard } from '../../utilities';
 import Toast from 'react-native-toast-message';
 import { useNavigation } from '@react-navigation/core';
+import appColors from '../../styles/appColors';
+import appStyles from '../../styles/appStyles';
 
 const StoreScreenTitle = ({ isNew, store, updateName }) => {
   const [name, setName] = useState('');
@@ -65,36 +67,32 @@ const StoreScreenTitle = ({ isNew, store, updateName }) => {
   }
 
   return (
-    <>
-      {
-        !isEdit &&
-        <TouchableOpacity
-          onPress={startEdit}
-        >
-          <Text>{name}</Text>
-        </TouchableOpacity>
-      }
-      <Box>
-        <TextInput
-          ref={textInputRef}
-          style={{
-            width: 200,
-            textAlign: 'center',
-            display: !isEdit ? 'none' : 'flex'
-          }}
-          placeholder="Enter Store Name"
-          onFocus={() => {
-            setSelection({ start: name.length || 0, end: name.length || 0 })
-          }}
-          selection={selection}
-          onSelectionChange={setSelection}
-          value={name}
-          onChangeText={setName}
-          onSubmitEditing={submitTitle}
-          onEndEditing={submitTitle}
-        />
-      </Box>
-    </>
+    <Box>
+    {
+      !isEdit &&
+      <TouchableOpacity onPress={startEdit} >
+        <Text style={appStyles.pageTitle}>{name}</Text>
+      </TouchableOpacity>
+    }
+      <TextInput
+        ref={textInputRef}
+        style={{
+          width: 200,
+          display: !isEdit ? 'none' : 'flex',
+          ...appStyles.pageTitle,
+        }}
+        placeholder="Enter Store Name"
+        onFocus={() => {
+          setSelection({ start: name.length || 0, end: name.length || 0 })
+        }}
+        selection={selection}
+        onSelectionChange={setSelection}
+        value={name}
+        onChangeText={setName}
+        onSubmitEditing={submitTitle}
+        onEndEditing={submitTitle}
+      />
+    </Box>
   )
 }
 

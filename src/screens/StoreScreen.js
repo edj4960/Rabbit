@@ -9,6 +9,7 @@ import StoreScreenMenu from '../components/store/StoreScreenMenu';
 import ItemList from '../components/item/ItemList';
 import AddItem from '../components/item/AddItem';
 import { db } from '../firebase';
+import appStyles from '../styles/appStyles';
 
 const StoreScreen = ({ route }) => {
   const navigation = useNavigation();
@@ -25,7 +26,6 @@ const StoreScreen = ({ route }) => {
   // Assign store name to title
   useEffect(() => {
     navigation.setOptions({
-      title: <StoreScreenTitle isNew={!id} store={store} updateName={updateName} />,
       headerRight: () => {
         return <StoreScreenMenu storeId={id} />
       } 
@@ -44,11 +44,15 @@ const StoreScreen = ({ route }) => {
   }
 
   return (
-    <Box f={1} backgroundColor="black">
+    <Box style={appStyles.background}>
+      <StoreScreenTitle isNew={!id} store={store} updateName={updateName} />
       <ItemList items={store?.items || []} storeId={store.id} />
       {
         store?.name &&
-        <AddItem storeId={store.id} nextPos={store?.items?.length || 0} />
+        <AddItem
+          storeId={store.id}
+          nextPos={store?.items?.length || 0}
+        />
       }
     </Box>
   )

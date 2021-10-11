@@ -102,8 +102,9 @@ const ItemListEntry = ({ item, drag, storeId }) => {
       >
         <TouchableOpacity
           onPress={startEdit}
+          delayPressIn={200}
           onLongPress={drag}
-          delayLongPress={400}
+          delayLongPress={800}
         >
           <Box style={styles.itemInnerContiner}>
             <CompleteItem itemId={item.id} itemRemovalAnim={itemRemovalAnim} />
@@ -115,7 +116,8 @@ const ItemListEntry = ({ item, drag, storeId }) => {
               style={{
                 height: 50,
                 width: 200,
-                display: !isEdit ? 'none' : 'flex'
+                display: !isEdit ? 'none' : 'flex',
+                ...styles.itemText
               }}
               value={name}
               onChangeText={setName}

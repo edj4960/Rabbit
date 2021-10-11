@@ -3,9 +3,11 @@ import { useNavigation } from '@react-navigation/core';
 import { Alert } from 'react-native';
 import { Box, Text } from 'react-native-design-utility';
 
-import { Menu, MenuOptions, MenuOption, MenuTrigger } from 'react-native-popup-menu';
+import { Menu, MenuOptions, MenuOption, MenuTrigger, renderers } from 'react-native-popup-menu';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import { db } from '../../firebase';
+import appColors from '../../styles/appColors';
+import { faTrashAlt } from '@fortawesome/free-solid-svg-icons';
 
 const StoreScreenMenu = ({ storeId }) => {
   const navigation = useNavigation();
@@ -44,16 +46,22 @@ const StoreScreenMenu = ({ storeId }) => {
   return (
     !!storeId &&
     <Box mr={15}>
-      <Menu>
+      <Menu renderer={renderers.ContextMenu}>
         <MenuTrigger>
-          <FontAwesomeIcon icon="ellipsis-v" />
+          <FontAwesomeIcon icon="ellipsis-v" color={appColors.primary} />
         </MenuTrigger>
-        <MenuOptions>
-          <MenuOption
-            onSelect={confirmDelete}
-          >
-            <Text>
-              <FontAwesomeIcon icon="trash" />{" "}Delete
+        <MenuOptions
+          optionsContainerStyle={{
+            marginTop: 20,
+            backgroundColor: appColors.background
+          }}
+          style={{
+            padding: 5,
+          }}
+        >
+          <MenuOption onSelect={confirmDelete}>
+            <Text color={appColors.warning}>
+              <FontAwesomeIcon icon={faTrashAlt} color={appColors.warning} />{" "}Delete
             </Text>
           </MenuOption>
         </MenuOptions>

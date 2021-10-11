@@ -3,6 +3,7 @@ import { StyleSheet, View } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { Box, Text } from 'react-native-design-utility';
 import { db } from '../../firebase';
+import appStyles from '../../styles/appStyles';
 
 const AddItem = ({ storeId, nextPos }) => {
   const onPress = async () => {
@@ -15,20 +16,10 @@ const AddItem = ({ storeId, nextPos }) => {
   }
 
   return (
-    <View
-      style={styles.addItemContainer}
-    >
-      <TouchableOpacity
-        onPress={onPress}
-      >
-        <Box
-          h={50}
-          w={100}
-          borderRadius={5}
-          center
-          backgroundColor="grey"
-        >
-          <Text>Add Item</Text>
+    <View style={appStyles.bottomRightContainer}>
+      <TouchableOpacity onPress={onPress}>
+        <Box style={appStyles.addButton}>
+          <Text center bold color={appColors.primaryLight}>Add Item</Text>
         </Box>
       </TouchableOpacity>
     </View>
@@ -36,11 +27,6 @@ const AddItem = ({ storeId, nextPos }) => {
 }
 
 const styles = StyleSheet.create({
-  addItemContainer: {
-    position: 'absolute',
-    bottom: 20,
-    right: 20,
-  }
 })
 
 export default AddItem;

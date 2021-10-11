@@ -4,6 +4,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 
 import MainTabNavigator from './MainTabNavigator';
 import StoreScreen from '../screens/StoreScreen';
+import appColors from '../styles/appColors';
 
 const Stack = createStackNavigator();
 
@@ -11,7 +12,11 @@ const RootNavigator = () => {
   
   return (
     <NavigationContainer>
-      <Stack.Navigator name="Root">
+      <Stack.Navigator name="Root" screenOptions={{
+        headerBackTitleStyle: {
+          color: appColors.primary
+        }
+      }}>
         <Stack.Screen
           name="Home"
           options={{ headerShown: false }}
@@ -21,7 +26,12 @@ const RootNavigator = () => {
           name="Store"
           component={StoreScreen}
           options={{
-            headerTitleAlign: 'center'
+            title: '',
+            headerStyle: {
+              backgroundColor: appColors.backgroundLight,
+              shadowColor: appColors.backgroundLight,
+            },
+            headerTintColor: appColors.primary
           }}
         />
       </Stack.Navigator>

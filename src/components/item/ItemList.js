@@ -34,19 +34,14 @@ const ItemList = ({ items, storeId, scrollable = true }) => {
   }
 
   return (
-    <View style={{
-      backgroundColor: 'grey',
-      height: '100%'
-    }}>
-      <DraggableFlatList
-        data={data}
-        keyExtractor={(item) => item.id}
-        renderItem={renderItem}
-        onDragEnd={reorderItems}
-        maxToRenderPerBatch={6}
-        scrollEnabled={scrollable}
-      />
-    </View>
+    <DraggableFlatList
+      data={data}
+      keyExtractor={(item) => item.id}
+      renderItem={renderItem}
+      onDragEnd={reorderItems}
+      scrollEnabled={scrollable}
+      // style={{height: '100%'}}
+    />
   )
 }
 
