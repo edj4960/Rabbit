@@ -16,7 +16,11 @@ export const StoreListProvider = props => {
     if (items?.length === 0 || storesRaw?.length === 0) return;
 
     const storesWithItems = storesRaw.map((store) => {
-      store.items = items.filter((item) => item.storeId === store.id && !item.completedAt).sort((a, b) => a.order > b.order);
+      if (store.itemIds) {
+        store.items = store.itemIds.map((itemId) => items.find((item) => item.id == itemId)).reverse();
+      } else {
+        store.items = [];
+      }
       return store;
     });
 

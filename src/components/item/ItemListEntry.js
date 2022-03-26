@@ -11,6 +11,7 @@ import CompleteItem from './CompleteItem';
 import SwipeableItem from 'react-native-swipeable-item'
 import appColors from '../../styles/appColors';
 import appStyles from '../../styles/appStyles';
+import { deleteItem } from '../../dao/ItemDao';
 
 const ItemListEntry = ({ item, drag, storeId }) => {
   const [name, setName] = useState('');
@@ -27,13 +28,11 @@ const ItemListEntry = ({ item, drag, storeId }) => {
     textInputRef.current.focus();
   }
 
-  const deleteItem = async () => {
+  const removeItem = async () => {
     Animated.sequence([
       itemRemovalAnim
     ]).start(() => {
-      db.collection('items')
-        .doc(item.id)
-        .delete();
+      deleteItem(item.id, storeId);
     });
   }
 
@@ -48,7 +47,7 @@ const ItemListEntry = ({ item, drag, storeId }) => {
 
   const submitName = async () => {
     if (!name) {
-      await deleteItem();
+      await removeItem();
       return;
     }
 
@@ -73,7 +72,7 @@ const ItemListEntry = ({ item, drag, storeId }) => {
       >
         <TouchableOpacity
           style={styles.deleteButton}
-          onPress={deleteItem}
+          onPress={removeItem}
         >
           <FontAwesomeIcon
             icon={faTrashAlt}
@@ -108,7 +107,7 @@ const ItemListEntry = ({ item, drag, storeId }) => {
           delayLongPress={800}
         >
           <Box style={styles.itemInnerContiner}>
-            <CompleteItem itemId={item.id} itemRemovalAnim={itemRemovalAnim} />
+            <CompleteItem itemId={item.id} storeId={storeId} itemRemovalAnim={itemRemovalAnim} />
             {
               !isEdit && <Text style={appStyles.itemText}>{name}</Text>
             }

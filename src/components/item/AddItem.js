@@ -9,8 +9,9 @@ import { faArrowUp } from '@fortawesome/free-solid-svg-icons';
 
 import appStyles from '../../styles/appStyles';
 import appColors from '../../styles/appColors';
+import { addItem } from '../../dao/ItemDao';
 
-const AddItem = ({ storeId, nextPos }) => {
+const AddItem = ({ storeId }) => {
   const [showInput, setShowInput] = useState(false);
   const [name, setName] = useState('');
   const textInputRef = useRef();
@@ -31,13 +32,7 @@ const AddItem = ({ storeId, nextPos }) => {
   }
 
   const submitItem = () => {
-    db.collection('items')
-      .add({
-        createdAt: new Date(),
-        storeId,
-        order: nextPos,
-        name: name
-      });
+    addItem(name, storeId);
     setName('');
   }
 

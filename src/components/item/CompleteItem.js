@@ -4,8 +4,9 @@ import { db } from '../../firebase';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import { faCheckCircle } from '@fortawesome/free-solid-svg-icons';
 import appColors from '../../styles/appColors';
+import { deleteItem } from '../../dao/ItemDao';
 
-const CompleteItem = ({ itemId, itemRemovalAnim }) => {
+const CompleteItem = ({ itemId, storeId, itemRemovalAnim }) => {
   const scaleAnim = useRef(new Animated.Value(1)).current;
   const completeIconAnim = useRef(new Animated.Value(0)).current;
   const diameter = 25;
@@ -33,9 +34,7 @@ const CompleteItem = ({ itemId, itemRemovalAnim }) => {
   }
 
   const markComplete = async () => {
-    await db.collection('items')
-      .doc(itemId)
-      .delete();
+    await deleteItem(itemId, storeId);
   }
 
   const onPress = async () => {

@@ -4,6 +4,7 @@ import { db } from '../../firebase';
 import { Box, Text } from 'react-native-design-utility';
 
 import ItemListEntry from './ItemListEntry';
+import { reorderStoreItems } from '../../dao/StoreDao';
 
 const ItemList = ({ items, storeId, scrollable = true }) => {
   const [data, setData] = useState([]);
@@ -22,17 +23,7 @@ const ItemList = ({ items, storeId, scrollable = true }) => {
 
   const reorderItems = async ({ data }) => {
     setData(data);
-
-    const batch = db.batch();
-
-    data.forEach((item, idx) => {
-      if (item.order !== idx) {
-        const docRef = db.collection('items').doc(item.id);
-        batch.update(docRef, { order: idx });
-      }
-    });
-
-    await batch.commit();
+    await reorderStoreItems(storeId, data.map((item) => item.id));
   }
 
   return (
