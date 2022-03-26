@@ -11,7 +11,7 @@ const Stack = createStackNavigator();
 const RootNavigator = () => {
   
   return (
-    <NavigationContainer>
+    <NavigationContainer theme={{ colors: { background: appColors.backgroundLight }}}>
       <Stack.Navigator name="Root" screenOptions={{
         headerBackTitleStyle: {
           color: appColors.primary
