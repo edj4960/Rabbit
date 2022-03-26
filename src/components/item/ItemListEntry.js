@@ -10,6 +10,7 @@ import Reanimated from 'react-native-reanimated';
 import CompleteItem from './CompleteItem';
 import SwipeableItem from 'react-native-swipeable-item'
 import appColors from '../../styles/appColors';
+import appStyles from '../../styles/appStyles';
 
 const ItemListEntry = ({ item, drag, storeId }) => {
   const [name, setName] = useState('');
@@ -109,7 +110,7 @@ const ItemListEntry = ({ item, drag, storeId }) => {
           <Box style={styles.itemInnerContiner}>
             <CompleteItem itemId={item.id} itemRemovalAnim={itemRemovalAnim} />
             {
-              !isEdit && <Text style={styles.itemText}>{name}</Text>
+              !isEdit && <Text style={appStyles.itemText}>{name}</Text>
             }
             <TextInput
               ref={textInputRef}
@@ -117,7 +118,7 @@ const ItemListEntry = ({ item, drag, storeId }) => {
                 height: 50,
                 width: 200,
                 display: !isEdit ? 'none' : 'flex',
-                ...styles.itemText
+                ...appStyles.itemText
               }}
               value={name}
               onChangeText={setName}
@@ -144,10 +145,6 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: 'row',
     alignItems: 'center'
-  },
-  itemText: {
-    fontSize: 18,
-    color: appColors.light
   },
   underlayLeft: {
     flex: 1,

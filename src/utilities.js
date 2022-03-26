@@ -5,6 +5,6 @@ export const collectIdsAndDocs = doc => {
   return { id: doc.id ? doc.id : '', ...doc.data() };
 };
 
-export const focusInputWithKeyboard = (inputRef) => {
-  setTimeout(() => inputRef.current.focus(), 100);
+export const focusInputWithKeyboard = (inputRef, delay) => {
+  setTimeout(() => inputRef.current.focus(), delay ?? 100);
 }

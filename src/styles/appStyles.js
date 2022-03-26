@@ -1,6 +1,9 @@
 import { StyleSheet } from 'react-native';
 import appColors from './appColors';
 
+const paddingVertical = 25;
+const paddingHorizontal = 15;
+
 export default appStyles = StyleSheet.create({
   pageTitle: {
     fontWeight: 'bold',
@@ -11,8 +14,8 @@ export default appStyles = StyleSheet.create({
   },
   background: {
     backgroundColor: appColors.backgroundLight,
-    paddingVertical: 25,
-    paddingHorizontal: 15,
+    paddingVertical: paddingVertical,
+    paddingHorizontal: paddingHorizontal,
     height: '100%'
   },
 
@@ -35,5 +38,14 @@ export default appStyles = StyleSheet.create({
     backgroundColor: appColors.background,
     borderTopWidth: 0,
     color: appColors.white
-  }
+  },
+  counterPadding: {
+    marginVertical: -paddingVertical,
+    marginHorizontal: -paddingHorizontal,
+  },
+
+  itemText: {
+    fontSize: 18,
+    color: appColors.light
+  },
 });
