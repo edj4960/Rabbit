@@ -5,7 +5,6 @@ import { useNavigation } from '@react-navigation/core';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 
 import ItemListEntry from '../components/item/ItemListEntry';
-import ItemList from '../components/item/ItemList';
 import { StoreListContext } from '../contexts/StoreListContext';
 import appStyles from '../styles/appStyles';
 import appColors from '../styles/appColors';

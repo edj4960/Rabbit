@@ -20,8 +20,9 @@ export default appStyles = StyleSheet.create({
   },
 
   bottomRightContainer: {
-    justifyContent: 'flex-end',
-    alignItems: 'flex-end'
+    position: 'absolute',
+    right: paddingHorizontal+10,
+    bottom: paddingVertical+15,
   },
   addButton: {
     backgroundColor: appColors.primaryDark,

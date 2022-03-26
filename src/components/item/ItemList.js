@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import DraggableFlatList from 'react-native-draggable-flatlist';
-import { db } from '../../firebase';
 import { Box, Text } from 'react-native-design-utility';
 
 import ItemListEntry from './ItemListEntry';
@@ -39,7 +38,7 @@ const ItemList = ({ items, storeId, scrollable = true }) => {
         keyExtractor={(item) => item.id}
         renderItem={renderItem}
         onDragEnd={reorderItems}
-        scrollEnabled={scrollable}
+        autoscrollSpeed={500}
       />
     </>
   )

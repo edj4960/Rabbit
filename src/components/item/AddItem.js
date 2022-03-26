@@ -2,7 +2,6 @@ import React, { useEffect, useState, useRef } from 'react';
 import { Keyboard, StyleSheet, View } from 'react-native';
 import { TextInput, TouchableOpacity } from 'react-native-gesture-handler';
 import { Box, Text } from 'react-native-design-utility';
-import { db } from '../../firebase';
 import { focusInputWithKeyboard } from '../../utilities';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import { faArrowUp } from '@fortawesome/free-solid-svg-icons';
